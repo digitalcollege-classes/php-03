@@ -1,5 +1,20 @@
-<?php
+<?php 
+    render('components/menu');
 
-echo "Olá mundo";
+    $url = $_SERVER['REQUEST_URI'];
 
-include "../src/teste.php";
+    if ($url === '/') {
+        render('pages/home');
+    } else if($url === '/cadastro') {
+        render('pages/add');
+    } else if ($url === '/listar') {
+        render('pages/list');
+    } else {
+        render('pages/notFound');
+    }
+
+    function render(string $view): void
+    {
+        include "../src/{$view}.phtml";
+    }
+?>
