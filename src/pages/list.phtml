@@ -21,6 +21,8 @@
                 $dados = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($dados as $cada) {
+                    $id = $cada['id'];
+
                     echo "
                         <tr>
                             <td>{$cada['nome']}</td>
@@ -28,7 +30,7 @@
                             <td>{$cada['telefone']}</td>
                             <td>
                                 <a href='#' class='btn btn-sm btn-warning'>Editar</a>
-                                <a href='#' class='btn btn-sm btn-danger'>Excluir</a>
+                                <a href='/excluir?id={$id}' class='btn btn-sm btn-danger'>Excluir</a>
                             </td>
                         </tr>
                     ";

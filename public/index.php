@@ -1,11 +1,13 @@
 <?php 
-    $url = $_SERVER['REQUEST_URI'];
+    //$url = explode('?', $_SERVER['REQUEST_URI'])[0];
+    $url = parse_url($_SERVER['REQUEST_URI']);
 
     // PHP 8 >
-    $view = match ($url) {
+    $view = match ($url['path']) {
         '/' => 'pages/home',
         '/cadastro' => 'pages/add',
         '/listar' => 'pages/list',
+        '/excluir' => 'pages/delete',
         default => 'pages/notFound',
     };
 

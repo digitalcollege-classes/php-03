@@ -1,17 +1,25 @@
 <?php
     if (false === empty($_POST)) {
+        //recebendo os dados que vieram do form do HTML
         $name = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
 
         $sql = "
-            INSERT INTO tb_contatos (name, email, phone)
+            INSERT INTO tb_contatos (nome, email, telefone)
             VALUES ('{$name}', '{$email}', '{$phone}');
         ";
 
-        //proximo passo: executar no banco de dados
-        // SQL na view eh muito errado
-        // @AlessandroFeitoza
+        include '../src/conexao.php';
+
+        // esse codigo é sujeito a ataques SQL Injection
+        $pdo->query($sql);
+
+        echo "<div class='alert alert-success'>
+            <strong>Pronto!</strong>
+            Novo contatinho inserido 😈 🔥<br>
+            <em>{$name}</em>
+        </div>";
     }
 ?>
 
