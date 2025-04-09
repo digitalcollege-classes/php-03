@@ -48,7 +48,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <form action="" method="post">
+        <form action="/editar" method="post">
             <label for="name">Nome</label>
             <input name="name" type="text" id="name" class="form-control mb-2" placeholder="Digite aqui">
             
@@ -58,6 +58,7 @@
             <label for="phone">Telefone</label>
             <input name="phone" type="text" id="phone" class="form-control mb-3" placeholder="Digite aqui">
 
+            <input type="hidden" id="contact_id" name="id">
             <button class="btn btn-primary w-100">PRONTO</button>
         </form>
     </div>
@@ -65,7 +66,10 @@
 
 <script>
     function editar(dados) {
-        console.log(dados);
+        document.getElementById('name').value = dados.nome;
+        document.getElementById('phone').value = dados.telefone;
+        document.getElementById('email').value = dados.email;
+        document.getElementById('contact_id').value = dados.id;
     }
 
     function confirmar(event) {

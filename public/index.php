@@ -11,6 +11,7 @@
         '/cadastro' => 'pages/add',
         '/listar' => 'pages/list',
         '/excluir' => 'pages/delete',
+        '/editar' => 'pages/edit',
         default => 'pages/notFound',
     };
 
