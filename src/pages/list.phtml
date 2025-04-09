@@ -23,14 +23,16 @@
                 foreach ($dados as $cada) {
                     $id = $cada['id'];
 
+                    $json = json_encode($cada);
+
                     echo "
                         <tr>
                             <td>{$cada['nome']}</td>
                             <td>{$cada['email']}</td>
                             <td>{$cada['telefone']}</td>
                             <td>
-                                <a href='#' class='btn btn-sm btn-warning'>Editar</a>
-                                <a href='/excluir?id={$id}' class='btn btn-sm btn-danger'>Excluir</a>
+                                <a href='#' onclick='editar({$json})' data-bs-toggle='offcanvas' data-bs-target='#editarContato' class='btn btn-sm btn-warning'>Editar</a>
+                                <button onclick='confirmar(this)' href='/excluir?id={$id}' class='btn btn-sm btn-danger'>Excluir</button>
                             </td>
                         </tr>
                     ";
@@ -39,4 +41,39 @@
         </tbody>
     </table>
 </section>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="editarContato" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasLabel">Editar Contato</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form action="" method="post">
+            <label for="name">Nome</label>
+            <input name="name" type="text" id="name" class="form-control mb-2" placeholder="Digite aqui">
+            
+            <label for="email">Email</label>
+            <input name="email" type="text" id="email" class="form-control mb-2" placeholder="Digite aqui">
+            
+            <label for="phone">Telefone</label>
+            <input name="phone" type="text" id="phone" class="form-control mb-3" placeholder="Digite aqui">
+
+            <button class="btn btn-primary w-100">PRONTO</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function editar(dados) {
+        console.log(dados);
+    }
+
+    function confirmar(event) {
+        if (false === confirm("Tem certeza?")) {
+            return;
+        }
+
+        location.href = event.getAttribute('href');
+    }
+</script>
 

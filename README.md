@@ -28,6 +28,12 @@ Pronto,é sucesso!
 
 Acesse o http://localhost:8080
 
+## Como migrar o banco de dados
+Execute no seu terminal:
+```shell
+make migrar-database
+```
+
 
 ## Para alterar alguma coisa
 

@@ -1,4 +1,7 @@
 <?php 
+    //habilitando exibir os erros
+    ini_set('display_errors', 1);
+
     //$url = explode('?', $_SERVER['REQUEST_URI'])[0];
     $url = parse_url($_SERVER['REQUEST_URI']);
 
