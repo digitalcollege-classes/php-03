@@ -14,11 +14,11 @@ Essa estrutura já está dockerizada, então basta ter o docker compose rodando 
 
 Primeiro basta clonar o repositório
 
-`git clone https://github.com/alessandrofeitoza/setup-php-docker`
+`git clone https://github.com/digitalcollege-classes/php-03`
 
 Agora entre na pasta com o terminal 
 
-`cd setup-php-docker`
+`cd php-03`
 
 E agora basta rodar o docker
 
