@@ -11,10 +11,12 @@
     $view = match ($url['path']) {
         '/' => 'pages/login',
         '/dashboard' => 'pages/home',
-        '/contatos/cadastro' => 'pages/add',
-        '/contatos/listar' => 'pages/list',
-        '/contatos/excluir' => 'pages/delete',
-        '/contatos/editar' => 'pages/edit',
+        '/cadastro' => 'pages/usuario/add',
+
+        '/contatos/cadastro' => 'pages/contato/add',
+        '/contatos/listar' => 'pages/contato/list',
+        '/contatos/excluir' => 'pages/contato/delete',
+        '/contatos/editar' => 'pages/contato/edit',
         default => 'pages/notFound',
     };
 
