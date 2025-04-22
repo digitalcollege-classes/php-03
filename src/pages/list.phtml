@@ -32,7 +32,7 @@
                             <td>{$cada['telefone']}</td>
                             <td>
                                 <a href='#' onclick='editar({$json})' data-bs-toggle='offcanvas' data-bs-target='#editarContato' class='btn btn-sm btn-warning'>Editar</a>
-                                <button onclick='confirmar(this)' href='/excluir?id={$id}' class='btn btn-sm btn-danger'>Excluir</button>
+                                <button onclick='confirmar(this)' href='/contatos/excluir?id={$id}' class='btn btn-sm btn-danger'>Excluir</button>
                             </td>
                         </tr>
                     ";
@@ -48,7 +48,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <form action="/editar" method="post">
+        <form action="/contatos/editar" method="post">
             <label for="name">Nome</label>
             <input name="name" type="text" id="name" class="form-control mb-2" placeholder="Digite aqui">
             
