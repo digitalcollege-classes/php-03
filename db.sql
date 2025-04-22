@@ -15,6 +15,15 @@ CREATE TABLE tb_contatos (
     telefone VARCHAR(20) NOT NULL 
 );
 
+CREATE TABLE IF NOT EXISTS tb_usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL 
+);
+
+
+
 -- Listar as tabelas de um banco --
 SHOW TABLES;
 

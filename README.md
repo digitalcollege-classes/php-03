@@ -28,10 +28,29 @@ Pronto,é sucesso!
 
 Acesse o http://localhost:8080
 
+## Como acessar os containers do Docker
+### Para acessar o container do mysql
+```shell
+docker compose mysql exec bash
+```
+
+ou
+
+```shell
+docker exec -it <id> bash
+```
+
+O mesmo de cima vale pro container do `php`
+
 ## Como migrar o banco de dados
 Execute no seu terminal:
 ```shell
 make migrar-database
+```
+## Como cadastrar dados falsos
+Execute no seu terminal:
+```shell
+make load-fixtures
 ```
 
 

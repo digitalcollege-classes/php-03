@@ -10,6 +10,20 @@ migrar-database:
 	@docker compose exec mysql mysql -u root -proot -e "USE db_contatinhos; CREATE TABLE IF NOT EXISTS	 tb_contatos ( id INT PRIMARY KEY AUTO_INCREMENT, nome VARCHAR(50) NOT NULL, email VARCHAR(100) NULL, telefone VARCHAR(20) NOT NULL  );" > /dev/null 2>&1
 	@echo "\n>>> Sucesso, tabela de contatos criado!...\n"
 
+	@echo "\n>>> Criando tabela de USUARIOS\n"
+	@docker compose exec mysql mysql -u root -proot -e "\
+		USE db_contatinhos; \
+		CREATE TABLE IF NOT EXISTS tb_usuarios ( \
+			id INT PRIMARY KEY AUTO_INCREMENT, \
+			nome VARCHAR(50) NOT NULL, \
+			email VARCHAR(100) UNIQUE NOT NULL, \
+			senha VARCHAR(255) NOT NULL, \
+			criado_em DATETIME NOT NULL, \
+			atualizado_em DATETIME NOT NULL, \
+			ultimo_login DATETIME NOT NULL \
+		); " > /dev/null 2>&1
+	@echo "\n>>> Sucesso, tabela de usuarios criada!...\n"
+
 load-fixtures:
 	@echo "\n>>> Inserindo contatinhos...\n"
 	@docker compose exec mysql mysql -u root -proot -e "\
