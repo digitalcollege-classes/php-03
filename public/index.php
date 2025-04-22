@@ -9,7 +9,8 @@
 
     // PHP 8 >
     $view = match ($url['path']) {
-        '/' => 'pages/home',
+        '/' => 'pages/login',
+        '/dashboard' => 'pages/home',
         '/cadastro' => 'pages/add',
         '/listar' => 'pages/list',
         '/excluir' => 'pages/delete',
