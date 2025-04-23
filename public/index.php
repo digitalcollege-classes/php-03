@@ -1,24 +1,42 @@
 <?php 
     //habilitando exibir os erros
     ini_set('display_errors', 1);
+    // ini_set('session.gc_maxlifetime', 30);
 
+    // vai corrigir o problema do timezone, mudando para GMT-3
+    date_default_timezone_set('America/Fortaleza');
+
+    // habilitar o uso da variavel $_SESSION
+    session_start();
+    
     include '../src/utils/Request.php';
+    include '../src/utils/Security.php';
 
     //$url = explode('?', $_SERVER['REQUEST_URI'])[0];
     $url = parse_url($_SERVER['REQUEST_URI']);
 
     // PHP 8 >
-    $view = match ($url['path']) {
-        '/' => 'pages/login',
-        '/dashboard' => 'pages/home',
-        '/cadastro' => 'pages/usuario/add',
 
-        '/contatos/cadastro' => 'pages/contato/add',
-        '/contatos/listar' => 'pages/contato/list',
-        '/contatos/excluir' => 'pages/contato/delete',
-        '/contatos/editar' => 'pages/contato/edit',
-        default => 'pages/notFound',
-    };
+    if (true === hasLoggedUser()) {
+        $view = match ($url['path']) {
+            '/' => 'pages/home',
+            '/sair' => 'pages/logout',
+            
+            '/contatos/cadastro' => 'pages/contato/add',
+            '/contatos/listar' => 'pages/contato/list',
+            '/contatos/excluir' => 'pages/contato/delete',
+            '/contatos/editar' => 'pages/contato/edit',
+            default => 'pages/notFound',
+        };
+    } else {
+        // quando nao tiver ninguem logado
+        $view = match ($url['path']) {
+            '/' => 'pages/login',
+            '/cadastro' => 'pages/usuario/add',
+            default => 'pages/notFound',
+        };
+    }
+    
 
 
     render($view); 
@@ -26,7 +44,11 @@
     function render(string $view): void
     {
         include '../src/components/head.phtml';
-        include '../src/components/menu.phtml';
+        
+        if (true === hasLoggedUser()) {
+            include '../src/components/menu.phtml';
+        }
+
         include "../src/{$view}.phtml";
         include '../src/components/footer.phtml';
     }

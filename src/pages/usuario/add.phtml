@@ -29,14 +29,19 @@
            ':ultimo_login' => $now,
         ]);
         
-        echo "Pronto, usuario cadastrado    ";
+        echo "<div class='alert alert-success'>
+            <strong>Pronto!</strong>
+            Novo Usuário criado!<br>
+
+            <a href='/'>Entrar</a>
+        </div>";
     }
 ?>
 
 
 
-<section class="row">
-    <div class="col-4 offset-4">
+<section class="row mt-5">
+    <div class="col-4 offset-4 mt-5">
         <div class="card card-body">
             <h1>Cadastro de Usuário</h1>
             <hr>
