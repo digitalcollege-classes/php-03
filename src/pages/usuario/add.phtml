@@ -1,3 +1,40 @@
+<?php
+    //se o usuario tiver preenchido e enviado o form, vai entrar nesse if
+    if (false === empty($_POST)) {
+        $nome = parameter('nome');
+        $email = parameter('email');
+        $senha = parameter('senha');
+
+        $senha = password_hash($senha, PASSWORD_BCRYPT);
+
+        $sql = "
+            INSERT INTO tb_usuarios 
+                (nome, email, senha, criado_em, atualizado_em, ultimo_login)
+            VALUES
+                (:nome, :email, :senha, :criado_em, :atualizado_em, :ultimo_login)
+            ";
+
+        include '../src/conexao.php';
+        
+        $now = date('Y-m-d H:i:s');
+
+        // statement é o preparo da query, antes de ser executada
+        $statement = $pdo->prepare($sql);
+        $statement->execute([
+           ':nome' => $nome,
+           ':email' => $email,
+           ':senha' => $senha,
+           ':criado_em' => $now,
+           ':atualizado_em' => $now,
+           ':ultimo_login' => $now,
+        ]);
+        
+        echo "Pronto, usuario cadastrado    ";
+    }
+?>
+
+
+
 <section class="row">
     <div class="col-4 offset-4">
         <div class="card card-body">

@@ -19,7 +19,10 @@ CREATE TABLE IF NOT EXISTS tb_usuarios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL 
+    senha VARCHAR(255) NOT NULL,
+    criado_em DATETIME NOT NULL, 
+    atualizado_em DATETIME NOT NULL, 
+    ultimo_login DATETIME NOT NULL 
 );
 
 
