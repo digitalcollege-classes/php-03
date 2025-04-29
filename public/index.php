@@ -21,6 +21,8 @@
         $view = match ($url['path']) {
             '/' => 'pages/home',
             '/sair' => 'pages/logout',
+            // url    =>    caminho do html
+            '/usuario/perfil' => 'pages/usuario/perfil',
             
             '/contatos/cadastro' => 'pages/contato/add',
             '/contatos/listar' => 'pages/contato/list',

@@ -1,0 +1,46 @@
+<?php
+include '../src/conexao.php';
+
+$id = $_SESSION['user']['id'];
+
+$sql = "SELECT * FROM tb_usuarios WHERE id=:id";
+
+$statement = $pdo->prepare($sql);
+$statement->execute([
+    ':id' => $id,
+]);
+
+$user = $statement->fetch(PDO::FETCH_ASSOC);
+
+//se o usuario tiver enviado o form
+if (false === empty($_POST)) {
+    
+}
+?>
+
+<section class="card card-body">
+    <h3>
+        <i class="material-icons fs-1">person</i>
+        <?php echo $_SESSION['user']['nome']; ?>
+    </h3>
+
+    <hr>
+
+    <div class="alert alert-info">
+        <strong>Criado em: </strong> <?php echo $user['criado_em']; ?> 
+        <br>
+        <strong>Atualizado em: </strong> <?= $user['atualizado_em'] ?>
+        <br>
+        <strong>Último Login: </strong> <?= $user['ultimo_login'] ?> 
+    </div>
+
+    <form action="" method="post">
+        <input name="nome" value="<?= $user['nome'] ?>" type="text" class="form-control form-control-lg mb-3" placeholder="Nome">
+
+        <input name="email" value="<?= $user['email'] ?>" type="email" class="form-control form-control-lg mb-3" placeholder="Email">
+
+        <input name="senha"  type="password" class="form-control form-control-lg mb-3" placeholder="Senha">
+
+        <button class="btn btn-primary btn-lg w-100">ATUALIZAR</button>
+    </form>
+</section>
