@@ -34,8 +34,12 @@ if (false === empty($_POST)) {
                 'id' => $user['id'],
                 'nome' => $user['nome'],
             ];
-            
-            header('location: /');
+
+            echo "<h1>Bem vindo!</h1>";
+            echo "<a href='/'>Acessar dashboard</a>";
+
+            // Isso aqui vai gerar um Warning
+            // header('location: /');
         } else {
             // usuario existe, e a senha nao confere
             echo "
