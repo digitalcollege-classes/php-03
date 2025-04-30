@@ -1,4 +1,6 @@
 <?php
+    $id = $_SESSION['user']['id'];
+
     if (false === empty($_POST)) {
         //recebendo os dados que vieram do form do HTML
         $name = parameter('name');
@@ -6,8 +8,8 @@
         $phone = parameter('phone');
 
         $sql = "
-            INSERT INTO tb_contatos (nome, email, telefone)
-            VALUES (:nome, :email, :telefone);
+            INSERT INTO tb_contatos (nome, email, telefone, usuario_id)
+            VALUES (:nome, :email, :telefone, :usuario_id);
         ";
 
         //SQL Injection: a@a', '1231'); DELETE FROM tb_contatos; --
@@ -19,6 +21,7 @@
             ':nome' => $name,
             ':email' => $email,
             ':telefone' => $phone,
+            ':usuario_id' => $id,
         ]);
 
 

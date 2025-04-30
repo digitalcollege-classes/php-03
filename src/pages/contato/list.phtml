@@ -16,7 +16,9 @@
                 //ele traz a variavel $pdo pra ca
                 include '../src/conexao.php';
 
-                $resultado = $pdo->query('SELECT * FROM tb_contatos');
+                $id = $_SESSION['user']['id'];
+
+                $resultado = $pdo->query("SELECT * FROM tb_contatos WHERE usuario_id='{$id}'");
 
                 $dados = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
