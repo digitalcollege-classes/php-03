@@ -19,8 +19,16 @@
         $now = date('Y-m-d H:i:s');
 
         // statement é o preparo da query, antes de ser executada
-        $statement = $pdo->prepare($sql);
-        $statement->execute([
+        try{
+
+            if(!empty($nome) || !empty($email) || !empty($senha)){
+                echo "<div class='alert alert-danger mt-4'>
+                <strong>Erro:</strong>
+                Todos os campos são obrigatórios!</div>";
+            }else{
+
+            $statement = $pdo->prepare($sql);
+            $statement->execute([
            ':nome' => $nome,
            ':email' => $email,
            ':senha' => $senha,
@@ -28,13 +36,26 @@
            ':atualizado_em' => $now,
            ':ultimo_login' => $now,
         ]);
-        
-        echo "<div class='alert alert-success'>
+        echo "<div class='alert alert-success mt-4'>
             <strong>Pronto!</strong>
             Novo Usuário criado!<br>
 
             <a href='/'>Entrar</a>
         </div>";
+        }   
+        }catch(PDOException $e){
+            if($e->errorInfo[1] == 1062){
+                echo "<div class='alert alert-danger'>
+            <strong>Erro:</strong>
+            Usuário já cadastrado como e-mail: {$email}!</div>";
+//
+            }else{
+                echo "Erro:". $e-> getMessage();
+            }
+        }
+        
+        
+        
     }
 ?>
 
