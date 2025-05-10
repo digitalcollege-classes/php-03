@@ -7,8 +7,6 @@
 
         $senha = password_hash($senha, PASSWORD_BCRYPT);
 
-        
-
         $sql = "
             INSERT INTO tb_usuarios 
                 (nome, email, senha, criado_em, atualizado_em, ultimo_login)
