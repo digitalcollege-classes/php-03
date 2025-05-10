@@ -2,7 +2,7 @@ migrar-database:
 	@echo "\n" 
 	@echo ">>> Criando banco de dados...\n"
 
-	@docker compose exec mysql mysql -u root -proot -e "DROP DATABASE db_contatinhos; CREATE DATABASE IF NOT EXISTS db_contatinhos;" > /dev/null 2>&1
+	@docker compose exec mysql mysql -u root -proot -e "DROP DATABASE IF EXISTS db_contatinhos; CREATE DATABASE IF NOT EXISTS db_contatinhos;" > /dev/null 2>&1
 	
 	@echo "\n>>> Sucesso, banco criado!...\n"
 
