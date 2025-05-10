@@ -1,0 +1,65 @@
+<?php
+    //se o usuario tiver preenchido e enviado o form, vai entrar nesse if
+    if (false === empty($_POST)) {
+        $nome = parameter('nome');
+        $email = parameter('email');
+        $senha = parameter('senha');
+
+        $senha = password_hash($senha, PASSWORD_BCRYPT);
+
+        $sql = "
+            INSERT INTO tb_usuarios 
+                (nome, email, senha, criado_em, atualizado_em, ultimo_login)
+            VALUES
+                (:nome, :email, :senha, :criado_em, :atualizado_em, :ultimo_login)
+            ";
+
+        include '../src/conexao.php';
+        
+        $now = date('Y-m-d H:i:s');
+
+        // statement é o preparo da query, antes de ser executada
+        $statement = $pdo->prepare($sql);
+        $statement->execute([
+           ':nome' => $nome,
+           ':email' => $email,
+           ':senha' => $senha,
+           ':criado_em' => $now,
+           ':atualizado_em' => $now,
+           ':ultimo_login' => $now,
+        ]);
+        
+        echo "<div class='alert alert-success'>
+            <strong>Pronto!</strong>
+            Novo Usuário criado!<br>
+
+            <a href='/'>Entrar</a>
+        </div>";
+    }
+?>
+
+
+
+<section class="row mt-5">
+    <div class="col-4 offset-4 mt-5">
+        <div class="card card-body">
+            <h1>Cadastro de Usuário</h1>
+            <hr>
+
+            <form action="" method="post">
+                <input name="nome" type="text" class="form-control form-control-lg mb-3" placeholder="Nome">
+
+                <input name="email" type="email" class="form-control form-control-lg mb-3" placeholder="Email">
+    
+                <input name="senha" type="password" class="form-control form-control-lg mb-3" placeholder="Senha">
+    
+                <button class="btn btn-primary btn-lg w-100">ENTRAR</button>
+
+                <p class="mt-3 text-end">
+                    Já tem conta? <br>
+                    <a href="/">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>

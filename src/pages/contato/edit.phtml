@@ -1,0 +1,27 @@
+<?php
+
+include '../src/conexao.php';
+
+$nome = parameter('name');
+$email = parameter('email');
+$telefone = parameter('phone');
+$id = parameter('id');
+
+// esse codigo esta sujeito a XSS e SQL Injection   
+$sql = "
+    UPDATE tb_contatos 
+    SET 
+        nome='{$nome}', 
+        email='{$email}',
+        telefone='{$telefone}'
+    WHERE id='{$id}'
+";
+
+$pdo->query($sql);
+
+?>
+
+<div class="alert alert-success">
+    <strong>PRONTO!</strong>
+    O Contatinho <em> <?=$nome?> </em> foi Editado ✅
+</div>

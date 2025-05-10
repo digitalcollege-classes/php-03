@@ -1,0 +1,62 @@
+<?php
+    $id = $_SESSION['user']['id'];
+
+    if (false === empty($_POST)) {
+        //recebendo os dados que vieram do form do HTML
+        $name = parameter('name');
+        $email = parameter('email');
+        $phone = parameter('phone');
+
+        $sql = "
+            INSERT INTO tb_contatos (nome, email, telefone, usuario_id)
+            VALUES (:nome, :email, :telefone, :usuario_id);
+        ";
+
+        //SQL Injection: a@a', '1231'); DELETE FROM tb_contatos; --
+
+        include '../src/conexao.php';
+
+        // // bind
+        $pdo->prepare($sql)->execute([
+            ':nome' => $name,
+            ':email' => $email,
+            ':telefone' => $phone,
+            ':usuario_id' => $id,
+        ]);
+
+
+        echo "<div class='alert alert-success'>
+            <strong>Pronto!</strong>
+            Novo contatinho inserido 😈 🔥<br>
+            <em>{$name}</em>
+        </div>";
+    }
+?>
+
+<section class="card card-body shadow">
+    <h2> 
+        <i class="material-icons fs-2">person_add</i>
+        Cadastro
+    </h2>
+
+    <div class="row my-3 pt-5 align-items-center">
+        <div class="col">
+            <img src="/img/add.svg" width="80%" alt="">
+        </div>
+        <div class="col">
+            <form action="" method="post">
+                <label for="name">Nome</label>
+                <input name="name" type="text" id="name" class="form-control mb-2" placeholder="Digite aqui">
+                
+                <label for="email">Email</label>
+                <input name="email" type="text" id="email" class="form-control mb-2" placeholder="Digite aqui">
+                
+                <label for="phone">Telefone</label>
+                <input name="phone" type="text" id="phone" class="form-control mb-3" placeholder="Digite aqui">
+
+                <button class="btn btn-primary w-100">PRONTO</button>
+            </form>
+        </div>
+    </div>
+
+</section>
