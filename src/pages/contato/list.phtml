@@ -1,47 +1,52 @@
 <section class="card card-body shadow">
     <h1>Listar</h1>
     <hr>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    //ele traz a variavel $pdo pra ca
+                    include '../src/conexao.php';
 
-    <table class="table table-striped table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Telefone</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                //ele traz a variavel $pdo pra ca
-                include '../src/conexao.php';
+                    $id = $_SESSION['user']['id'];
 
-                $id = $_SESSION['user']['id'];
+                    $resultado = $pdo->query("SELECT * FROM tb_contatos WHERE usuario_id='{$id}'");
 
-                $resultado = $pdo->query("SELECT * FROM tb_contatos WHERE usuario_id='{$id}'");
+                    $dados = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-                $dados = $resultado->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($dados as $cada) {
+                        $id = $cada['id'];
 
-                foreach ($dados as $cada) {
-                    $id = $cada['id'];
+                        $json = json_encode($cada);
 
-                    $json = json_encode($cada);
+                        echo "
+                            <tr>
+                                <td>{$cada['nome']}</td>
+                                <td>{$cada['email']}</td>
+                                <td>{$cada['telefone']}</td>
+                                <td class='text-center'>
+                                    <div class='btn-group' role='group' aria-label='Basic mixed styles example'>
+                                        <button type='button' onclick='editar({$json})'  data-bs-target='#editarContato' class='btn btn-warning'>Editar</button>
+                                        <button type='button' onclick='confirmar(this)' href='/contatos/excluir?id={$id}'  class='btn btn-danger'>Excluir</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ";
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
-                    echo "
-                        <tr>
-                            <td>{$cada['nome']}</td>
-                            <td>{$cada['email']}</td>
-                            <td>{$cada['telefone']}</td>
-                            <td>
-                                <a href='#' onclick='editar({$json})' data-bs-toggle='offcanvas' data-bs-target='#editarContato' class='btn btn-sm btn-warning'>Editar</a>
-                                <button onclick='confirmar(this)' href='/contatos/excluir?id={$id}' class='btn btn-sm btn-danger'>Excluir</button>
-                            </td>
-                        </tr>
-                    ";
-                }
-            ?>
-        </tbody>
-    </table>
+    
 </section>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="editarContato" aria-labelledby="offcanvasLabel">
