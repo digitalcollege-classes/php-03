@@ -46,17 +46,30 @@
         <div class="col">
             <form action="" method="post">
                 <label for="name">Nome</label>
-                <input name="name" type="text" id="name" class="form-control mb-2" placeholder="Digite aqui">
+                <input required name="name" type="text" id="name" class="form-control mb-2" placeholder="Digite aqui">
                 
                 <label for="email">Email</label>
-                <input name="email" type="text" id="email" class="form-control mb-2" placeholder="Digite aqui">
+                <input required  name="email" type="text" id="email" class="form-control mb-2" placeholder="Digite aqui">
                 
                 <label for="phone">Telefone</label>
-                <input name="phone" type="text" id="phone" class="form-control mb-3" placeholder="Digite aqui">
+                <input required name="phone" type="number" id="phone" class="form-control mb-3" placeholder="Digite aqui">
 
                 <button class="btn btn-primary w-100">PRONTO</button>
             </form>
         </div>
     </div>
+
+    <script>
+       document.querySelectorAll("input").forEach(input => {
+        input.addEventListener("input", function (){
+            this.value= this.value.replace(/\s/g, ""); 
+        });
+       });
+
+        
+            
+    
+            
+    </script>
 
 </section>
