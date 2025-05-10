@@ -9,6 +9,8 @@ if (false === empty($_POST)) {
     // usuario nao existe
     $sql = 'SELECT * FROM tb_usuarios WHERE email=:email';
 
+    var_dump($sql);
+
     $statement = $pdo->prepare($sql);
     $statement->execute([
         ':email' => $email,
